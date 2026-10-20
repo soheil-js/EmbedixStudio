@@ -18,6 +18,10 @@ Built with Flutter, EmbedixStudio is maintained as a separate project from the c
 - 🏗️ **Separation of Concerns** — Keep the Flutter frontend separate from Embedix's .NET implementation.
 - 🚀 **Extensible Architecture** — Establish a foundation for future desktop features and improvements.
 
+## 📸 Screenshots
+
+![EmbedixStudio Demo](screenshots/demo.webp)
+
 ## 🔗 Related Project
 
 ### [Embedix](https://github.com/soheil-js/Embedix)
