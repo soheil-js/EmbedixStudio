@@ -15,27 +15,42 @@ class NativeFileSystemService implements FileSystemService {
 
   @override
   Future<String?> pickAssembly() async {
-    final result = await FilePicker.pickFiles(
+    final result = await FilePicker.pickFile(
+      windowsOptions: WindowsOptions(lockParentWindow: true),
+      linuxOptions: LinuxOptions(lockParentWindow: true),
       dialogTitle: 'Select input assembly',
       type: FileType.custom,
       allowedExtensions: ['dll', 'exe'],
     );
-    return result.single.path;
+
+    if (result == null) {
+      return null;
+    }
+
+    return result.path;
   }
 
   @override
   Future<List<String>> pickLibraries() async {
     final result = await FilePicker.pickFiles(
+      windowsOptions: WindowsOptions(lockParentWindow: true),
+      linuxOptions: LinuxOptions(lockParentWindow: true),
       dialogTitle: 'Select libraries to embed',
       type: FileType.custom,
       allowedExtensions: ['dll'],
     );
+
     return result.map((f) => f.path).whereType<String>().toList();
   }
 
   @override
   Future<String?> pickDirectory() {
-    return FilePicker.getDirectoryPath(dialogTitle: 'Select output directory');
+    return FilePicker.getDirectoryPath(
+      windowsOptions: WindowsOptions(lockParentWindow: true),
+      linuxOptions: LinuxOptions(lockParentWindow: true),
+      dialogTitle: 'Select output directory',
+      
+    );
   }
 
   @override
