@@ -1,8 +1,9 @@
 import 'package:embedix_studio/core/utils/app_info.dart';
+import 'package:embedix_studio/core/window/window_context.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/responsive/responsive.dart';
 import '../../../../core/theme/theme.dart';
+import '../../../../core/widgets/widgets.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key, this.onOpenCliReference});
@@ -13,9 +14,7 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 48,
-      padding: EdgeInsets.symmetric(
-        horizontal: context.byScreen<double>(mobile: 16, desktop: 24),
-      ),
+      padding: EdgeInsets.only(left: 8, right: 8),
       decoration: const BoxDecoration(
         color: AppColors.surfaceBar,
         border: Border(bottom: BorderSide(color: AppColors.borderSubtle)),
@@ -28,7 +27,11 @@ class TopBar extends StatelessWidget {
           Container(width: 1, height: 16, color: AppColors.border),
           const SizedBox(width: 10),
           Text('v${AppInfo.version}', style: AppText.brandSub),
-          const Spacer(),
+          Expanded(
+            child: context.dragToMoveArea(
+              child: SizedBox(height: double.infinity),
+            ),
+          ),
           InkWell(
             onTap: onOpenCliReference,
             child: const Padding(
@@ -36,6 +39,8 @@ class TopBar extends StatelessWidget {
               child: Text('CLI reference ↗', style: AppText.link),
             ),
           ),
+          SizedBox(width: 10),
+          WindowControls(),
         ],
       ),
     );
